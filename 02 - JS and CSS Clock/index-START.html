@@ -18,8 +18,9 @@
 
   <style>
     html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
-      background-size:cover;
+      background: #00C9FF; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #00C9FF, #92FE9D); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #00C9FF, #92FE9D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       font-family:'helvetica neue';
       text-align: center;
       font-size: 10px;
@@ -28,8 +29,8 @@
     body {
       margin: 0;
       font-size: 2rem;
-      display:flex;
-      flex:1;
+      display: flex;
+      flex: 1;
       min-height: 100vh;
       align-items: center;
     }
@@ -62,11 +63,35 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
     }
 
   </style>
 
   <script>
+   var secHand = document.querySelector(".second-hand");
+   var minHand = document.querySelector(".min-hand");
+   var hourHand = document.querySelector(".hour-hand");
+
+   function clock(){
+
+   var now = new Date();
+   var seconds = now.getSeconds();
+   var minutes = now.getMinutes();
+   var hours = now.getHours();
+   var secondsDegrees = ((seconds / 60) * 360) + 90;
+   var minutesDegrees = ((minutes / 60) * 360) + 90;
+   var hoursDegrees = ((hours / 12) * 360) + 90;
+
+   secHand.style.transform = `rotate(${secondsDegrees}deg)`;
+   minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+   hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+   };
+
+setInterval(clock, 1000)
+
 
 
   </script>
